@@ -15,6 +15,7 @@ class BankAccount {
   withdraw(amount, date) {
     this.#checkAmountIsIntAndPositive(amount);
     this.#validateDate(date);
+    this.#checkFunds(amount);
   }
 
   #validateDate(date) {
@@ -27,6 +28,12 @@ class BankAccount {
   #checkAmountIsIntAndPositive(amount) {
     if (!Number.isInteger(amount) || amount < 1) {
       throw new Error("Invalid amount - amount must be a positive integer");
+    }
+  }
+
+  #checkFunds(amount) {
+    if (amount > this.balance) {
+      throw new Error("Insufficient funds");
     }
   }
 }

@@ -58,7 +58,9 @@ describe("Bank Account", () => {
       });
 
       it("should throw an error if date is not valid", () => {
-        expect(() => bankAccount.deposit(200, "abcdefg")).toThrowError("Invalid Date - use format YYYY-MM-DD");
+        expect(() => bankAccount.deposit(200, "abcdefg")).toThrowError(
+          "Invalid Date - use format YYYY-MM-DD"
+        );
       });
     });
   });
@@ -84,8 +86,17 @@ describe("Bank Account", () => {
       });
 
       it("should throw an error if date is not valid", () => {
-        expect(() => bankAccount.withdraw(200, "abcdefg")).toThrowError("Invalid Date - use format YYYY-MM-DD");
+        expect(() => bankAccount.withdraw(200, "abcdefg")).toThrowError(
+          "Invalid Date - use format YYYY-MM-DD"
+        );
       });
-    })
-  })
+
+      it("should throw an error if withdrawal amount exceeds balance", () => {
+        bankAccount.deposit(200, "2022-12-25");
+        expect(() => bankAccount.withdraw(300, "2022-12-27")).toThrowError(
+          "Insufficient funds"
+        );
+      });
+    });
+  });
 });
