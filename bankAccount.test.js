@@ -66,6 +66,13 @@ describe("Bank Account", () => {
   });
 
   describe("withdrawing", () => {
+    describe("valid input", () => {
+      it("should subtract the amount from the balance", () => {
+        bankAccount.deposit(500, "2022-01-01");
+        bankAccount.withdraw(270, "2022-02-28");
+        expect(bankAccount.balance).toEqual(230);
+      });
+    });
     describe("invalid input", () => {
       it("should throw an error if amount is not an integer (A String)", () => {
         expect(() => bankAccount.withdraw("200", "2020-01-01")).toThrowError(

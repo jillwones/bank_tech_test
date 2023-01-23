@@ -16,6 +16,7 @@ class BankAccount {
     this.#checkAmountIsIntAndPositive(amount);
     this.#validateDate(date);
     this.#checkFunds(amount);
+    this.balance -= amount;
   }
 
   #validateDate(date) {
