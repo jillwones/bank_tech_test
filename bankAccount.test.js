@@ -44,10 +44,21 @@ describe("Bank Account", () => {
           "Invalid amount - amount must be a positive integer"
         );
       });
+
       it("should throw an error if amount is not an integer (A Float)", () => {
         expect(() => bankAccount.deposit(100.5, "2020-01-01")).toThrowError(
           "Invalid amount - amount must be a positive integer"
         );
+      });
+
+      it("should throw an error if amount is < 1", () => {
+        expect(() => bankAccount.deposit(-300, "2020-01-01")).toThrowError(
+          "Invalid amount - amount must be a positive integer"
+        );
+      });
+
+      it("should throw an error if date is not valid", () => {
+        expect(() => bankAccount.deposit(200, "abcdefg")).toThrowError("Invalid Date - use format YYYY-MM-DD");
       });
     });
   });
