@@ -7,7 +7,8 @@ class BankAccount {
 
   deposit(amount, date) {
     this.balance += amount;
+    this.transactions.push({ date: date, amount: amount, type: "deposit" });
   }
 }
 
-module.exports = BankAccount
+module.exports = BankAccount;
