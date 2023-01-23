@@ -17,12 +17,19 @@ class BankAccount {
     this.#validateDate(date);
     this.#checkFunds(amount);
     this.balance -= amount;
+    this.transactions.push({ date, amount, type: "withdraw" });
   }
 
   #validateDate(date) {
     const dateObject = new Date(date);
     if (dateObject == "Invalid Date") {
       throw new Error("Invalid Date - use format YYYY-MM-DD");
+    }
+    const lastTransaction = this.transactions[this.transactions.length - 1];
+    if (lastTransaction && dateObject <= new Date(lastTransaction.date)) {
+      throw new Error(
+        "Invalid Date - date of new transaction cannot be earlier than the last transaction date"
+      );
     }
   }
 
