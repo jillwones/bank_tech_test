@@ -6,18 +6,22 @@ class BankAccount {
   }
 
   deposit(amount, date) {
-    this.#checkAmountIsIntAndPositive(amount);
+    this.#validateAmount(amount);
     this.#validateDate(date);
     this.balance += amount;
     this.transactions.push({ date, amount, type: "deposit" });
   }
 
   withdraw(amount, date) {
-    this.#checkAmountIsIntAndPositive(amount);
+    this.#validateAmount(amount);
     this.#validateDate(date);
     this.#checkFunds(amount);
     this.balance -= amount;
     this.transactions.push({ date, amount, type: "withdraw" });
+  }
+
+  printStatement() {
+    this.bankStatement.print(this.transactions);
   }
 
   #validateDate(date) {
@@ -33,7 +37,7 @@ class BankAccount {
     }
   }
 
-  #checkAmountIsIntAndPositive(amount) {
+  #validateAmount(amount) {
     if (!Number.isInteger(amount) || amount < 1) {
       throw new Error("Invalid amount - amount must be a positive integer");
     }

@@ -129,4 +129,15 @@ describe("Bank Account", () => {
       });
     });
   });
+
+  describe("print statement", () => {
+    it("should call the print method of the bank statement with the transactions", () => {
+      const mockBankStatement = {
+        print: jest.fn(),
+      };
+      const bankAccount = new BankAccount(mockBankStatement);
+      bankAccount.printStatement();
+      expect(mockBankStatement.print).toHaveBeenCalled();
+    });
+  });
 });
