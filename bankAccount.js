@@ -14,7 +14,7 @@ class BankAccount {
       throw new Error("Invalid Date - use format YYYY-MM-DD");
     }
     this.balance += amount;
-    this.transactions.push({ date: date, amount: amount, type: "deposit" });
+    this.transactions.push({ date, amount, type: "deposit" });
   }
 }
 
