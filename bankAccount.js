@@ -6,6 +6,9 @@ class BankAccount {
   }
 
   deposit(amount, date) {
+    if (!Number.isInteger(amount)) {
+      throw new Error("Invalid amount - amount must be a positive integer");
+    }
     this.balance += amount;
     this.transactions.push({ date: date, amount: amount, type: "deposit" });
   }

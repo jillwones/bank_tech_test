@@ -24,16 +24,26 @@ describe("Bank Account", () => {
   });
 
   describe("depositing", () => {
-    it("should add the amount to the balance", () => {
-      bankAccount.deposit(200, "2022-12-01");
-      expect(bankAccount.balance).toEqual(200);
+    describe("valid input", () => {
+      it("should add the amount to the balance", () => {
+        bankAccount.deposit(200, "2022-12-01");
+        expect(bankAccount.balance).toEqual(200);
+      });
+
+      it("should add an object representing that transaction to the transactions array", () => {
+        bankAccount.deposit(200, "2022-12-01");
+        expect(bankAccount.transactions).toEqual([
+          { date: "2022-12-01", amount: 200, type: "deposit" },
+        ]);
+      });
     });
 
-    it("should add an object representing that transaction to the transactions array", () => {
-      bankAccount.deposit(200, "2022-12-01");
-      expect(bankAccount.transactions).toEqual([
-        { date: "2022-12-01", amount: 200, type: "deposit" },
-      ]);
+    describe("invalid input", () => {
+      it("should throw an error if amount is not an integer (A String)", () => {
+        expect(() => bankAccount.deposit("200", "2020-01-01")).toThrowError(
+          "Invalid amount - amount must be a positive integer"
+        );
+      });
     });
   });
 });
