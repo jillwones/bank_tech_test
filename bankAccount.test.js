@@ -22,4 +22,11 @@ describe("Bank Account", () => {
       expect(bankAccount.bankStatement).toBeDefined();
     });
   });
+
+  describe("depositing", () => {
+    it("should add the amount to the balance", () => {
+      bankAccount.deposit(200, '2022-12-01');
+      expect(bankAccount.balance).toEqual(200);
+    })
+  })
 });

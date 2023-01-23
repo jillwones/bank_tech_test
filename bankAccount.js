@@ -4,6 +4,10 @@ class BankAccount {
     this.transactions = [];
     this.bankStatement = bankStatement;
   }
+
+  deposit(amount, date) {
+    this.balance += amount;
+  }
 }
 
 module.exports = BankAccount
