@@ -44,6 +44,11 @@ describe("Bank Account", () => {
           "Invalid amount - amount must be a positive integer"
         );
       });
+      it("should throw an error if amount is not an integer (A Float)", () => {
+        expect(() => bankAccount.deposit(100.5, "2020-01-01")).toThrowError(
+          "Invalid amount - amount must be a positive integer"
+        );
+      });
     });
   });
 });
