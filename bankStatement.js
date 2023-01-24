@@ -1,6 +1,10 @@
 class BankStatement {
-  constructor() {
-    this.currentBalance = 0;
+  formatDate(date) {
+    return date.toLocaleDateString("en-GB");
+  }
+
+  formatAmount(amount) {
+    return amount.toFixed(2);
   }
 }
 

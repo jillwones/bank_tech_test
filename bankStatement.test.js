@@ -5,10 +5,14 @@ describe("Bank Statement", () => {
   beforeEach(() => {
     bankStatement = new BankStatement();
   });
-  describe("when initialised", () => {
-    it("has 0 as current balance", () => {
-      expect(bankStatement.currentBalance).toEqual(0);
+  describe("formatting extras", () => {
+    it("correctly formats date", () => {
+      const date = new Date("2023-01-24T10:59:31.832Z");
+      expect(bankStatement.formatDate(date)).toEqual("24/01/2023");
+    });
+
+    it("correctly formats amount when passed amount", () => {
+      expect(bankStatement.formatAmount(200)).toEqual("200.00");
     });
   });
-  describe("printing the statement", () => {});
 });
