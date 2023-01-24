@@ -1,4 +1,4 @@
-const BankAccount = require("./src/bankAccount");
+const BankAccount = require("../src/bankAccount");
 
 describe("integration", () => {
   it("allows a user to deposit & withdraw, then print a statement", () => {
