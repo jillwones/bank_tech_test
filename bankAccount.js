@@ -5,36 +5,21 @@ class BankAccount {
     this.bankStatement = bankStatement;
   }
 
-  deposit(amount, date) {
+  deposit(amount) {
     this.#validateAmount(amount);
-    this.#validateDate(date);
     this.balance += amount;
-    this.transactions.push({ date, amount, type: "deposit" });
+    this.transactions.push({ date: new Date(), credit: amount, debit: null, balance: this.balance});
   }
 
-  withdraw(amount, date) {
+  withdraw(amount) {
     this.#validateAmount(amount);
-    this.#validateDate(date);
     this.#checkFunds(amount);
     this.balance -= amount;
-    this.transactions.push({ date, amount, type: "withdraw" });
+    this.transactions.push({ date: new Date(), credit: null, debit: amount, balance: this.balance});
   }
 
   printStatement() {
     this.bankStatement.print(this.transactions);
-  }
-
-  #validateDate(date) {
-    const dateObject = new Date(date);
-    if (dateObject == "Invalid Date") {
-      throw new Error("Invalid Date - use format YYYY-MM-DD");
-    }
-    const lastTransaction = this.transactions[this.transactions.length - 1];
-    if (lastTransaction && dateObject <= new Date(lastTransaction.date)) {
-      throw new Error(
-        "Invalid Date - date of new transaction cannot be earlier than the last transaction date"
-      );
-    }
   }
 
   #validateAmount(amount) {

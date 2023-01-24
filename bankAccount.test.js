@@ -26,47 +26,35 @@ describe("Bank Account", () => {
   describe("depositing", () => {
     describe("valid input", () => {
       it("should add the amount to the balance", () => {
-        bankAccount.deposit(200, "2022-12-01");
+        bankAccount.deposit(200);
         expect(bankAccount.balance).toEqual(200);
       });
 
       it("should add an object representing that transaction to the transactions array", () => {
-        bankAccount.deposit(200, "2022-12-01");
+        bankAccount.deposit(200);
+        const currentDate = new Date();
         expect(bankAccount.transactions).toEqual([
-          { date: "2022-12-01", amount: 200, type: "deposit" },
+          { date: currentDate, credit: 200, debit: null, balance: 200 },
         ]);
       });
     });
 
     describe("invalid input", () => {
       it("should throw an error if amount is not an integer (A String)", () => {
-        expect(() => bankAccount.deposit("200", "2020-01-01")).toThrowError(
+        expect(() => bankAccount.deposit("200")).toThrowError(
           "Invalid amount - amount must be a positive integer"
         );
       });
 
       it("should throw an error if amount is not an integer (A Float)", () => {
-        expect(() => bankAccount.deposit(100.5, "2020-01-01")).toThrowError(
+        expect(() => bankAccount.deposit(100.5)).toThrowError(
           "Invalid amount - amount must be a positive integer"
         );
       });
 
       it("should throw an error if amount is < 1", () => {
-        expect(() => bankAccount.deposit(-300, "2020-01-01")).toThrowError(
+        expect(() => bankAccount.deposit(-300)).toThrowError(
           "Invalid amount - amount must be a positive integer"
-        );
-      });
-
-      it("should throw an error if date is not valid", () => {
-        expect(() => bankAccount.deposit(200, "abcdefg")).toThrowError(
-          "Invalid Date - use format YYYY-MM-DD"
-        );
-      });
-
-      it("should throw an error if date is earlier than last transaction date", () => {
-        bankAccount.deposit(200, "2022-12-12");
-        expect(() => bankAccount.deposit(500, "2021-05-20")).toThrowError(
-          "Invalid Date - date of new transaction cannot be earlier than the last transaction date"
         );
       });
     });
@@ -75,56 +63,44 @@ describe("Bank Account", () => {
   describe("withdrawing", () => {
     describe("valid input", () => {
       it("should subtract the amount from the balance", () => {
-        bankAccount.deposit(500, "2022-01-01");
-        bankAccount.withdraw(270, "2022-02-28");
+        bankAccount.deposit(500);
+        bankAccount.withdraw(270);
         expect(bankAccount.balance).toEqual(230);
       });
 
       it("should add an object representing that transaction to the transactions array", () => {
-        bankAccount.deposit(200, "2022-12-01");
-        bankAccount.withdraw(100, "2023-01-01");
+        bankAccount.deposit(200);
+        bankAccount.withdraw(100);
+        const currentDate = new Date();
         expect(bankAccount.transactions).toEqual([
-          { date: "2022-12-01", amount: 200, type: "deposit" },
-          { date: "2023-01-01", amount: 100, type: "withdraw" },
+          { date: currentDate, credit: 200, debit: null, balance: 200 },
+          { date: currentDate, credit: null, debit: 100, balance: 100 },
         ]);
       });
     });
     describe("invalid input", () => {
       it("should throw an error if amount is not an integer (A String)", () => {
-        expect(() => bankAccount.withdraw("200", "2020-01-01")).toThrowError(
+        expect(() => bankAccount.withdraw("200")).toThrowError(
           "Invalid amount - amount must be a positive integer"
         );
       });
 
       it("should throw an error if amount is not an integer (A Float)", () => {
-        expect(() => bankAccount.withdraw(100.5, "2020-01-01")).toThrowError(
+        expect(() => bankAccount.withdraw(100.5)).toThrowError(
           "Invalid amount - amount must be a positive integer"
         );
       });
 
       it("should throw an error if amount is < 1", () => {
-        expect(() => bankAccount.withdraw(-300, "2020-01-01")).toThrowError(
+        expect(() => bankAccount.withdraw(-300)).toThrowError(
           "Invalid amount - amount must be a positive integer"
         );
       });
 
-      it("should throw an error if date is not valid", () => {
-        expect(() => bankAccount.withdraw(200, "abcdefg")).toThrowError(
-          "Invalid Date - use format YYYY-MM-DD"
-        );
-      });
-
       it("should throw an error if withdrawal amount exceeds balance", () => {
-        bankAccount.deposit(200, "2022-12-25");
-        expect(() => bankAccount.withdraw(300, "2022-12-27")).toThrowError(
+        bankAccount.deposit(200);
+        expect(() => bankAccount.withdraw(300)).toThrowError(
           "Insufficient funds"
-        );
-      });
-
-      it("should throw an error if date is earlier than last transaction date", () => {
-        bankAccount.deposit(200, "2022-12-12");
-        expect(() => bankAccount.withdraw(100, "2021-05-20")).toThrowError(
-          "Invalid Date - date of new transaction cannot be earlier than the last transaction date"
         );
       });
     });
