@@ -1,4 +1,4 @@
-const BankAccount = require("./bankAccount");
+const BankAccount = require("./src/bankAccount");
 
 describe("Bank Account", () => {
   let bankAccount;

@@ -30,8 +30,8 @@ class BankAccount {
   }
 
   printStatement(bankStatement = new BankStatement()) {
-    bankStatement.print(this.transactions);
-}
+    return bankStatement.print(this.transactions);
+  }
 
   #validateAmount(amount) {
     if (!Number.isInteger(amount) || amount < 1) {
