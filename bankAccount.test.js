@@ -15,12 +15,6 @@ describe("Bank Account", () => {
     it("should have an empty array of transactions when initialized", () => {
       expect(bankAccount.transactions).toEqual([]);
     });
-
-    it("should be passed in an instance of BankStatement", () => {
-      const mockBankStatement = jest.fn();
-      let bankAccount = new BankAccount(mockBankStatement);
-      expect(bankAccount.bankStatement).toBeDefined();
-    });
   });
 
   describe("depositing", () => {
@@ -111,8 +105,7 @@ describe("Bank Account", () => {
       const mockBankStatement = {
         print: jest.fn(),
       };
-      const bankAccount = new BankAccount(mockBankStatement);
-      bankAccount.printStatement();
+      bankAccount.printStatement(mockBankStatement);
       expect(mockBankStatement.print).toHaveBeenCalled();
     });
   });

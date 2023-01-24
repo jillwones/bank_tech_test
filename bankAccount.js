@@ -1,8 +1,9 @@
+const BankStatement = require("./bankStatement");
+
 class BankAccount {
-  constructor(bankStatement) {
+  constructor() {
     this.balance = 0;
     this.transactions = [];
-    this.bankStatement = bankStatement;
   }
 
   deposit(amount) {
@@ -28,9 +29,9 @@ class BankAccount {
     });
   }
 
-  printStatement() {
-    this.bankStatement.print(this.transactions);
-  }
+  printStatement(bankStatement = new BankStatement()) {
+    bankStatement.print(this.transactions);
+}
 
   #validateAmount(amount) {
     if (!Number.isInteger(amount) || amount < 1) {
