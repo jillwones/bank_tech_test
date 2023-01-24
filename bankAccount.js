@@ -11,7 +11,7 @@ class BankAccount {
     this.transactions.push({
       date: new Date(),
       credit: amount,
-      debit: null,
+      debit: 0,
       balance: this.balance,
     });
   }
@@ -22,7 +22,7 @@ class BankAccount {
     this.balance -= amount;
     this.transactions.push({
       date: new Date(),
-      credit: null,
+      credit: 0,
       debit: amount,
       balance: this.balance,
     });

@@ -34,7 +34,7 @@ describe("Bank Account", () => {
         bankAccount.deposit(200);
         const currentDate = new Date();
         expect(bankAccount.transactions).toEqual([
-          { date: currentDate, credit: 200, debit: null, balance: 200 },
+          { date: currentDate, credit: 200, debit: 0, balance: 200 },
         ]);
       });
     });
@@ -73,8 +73,8 @@ describe("Bank Account", () => {
         bankAccount.withdraw(100);
         const currentDate = new Date();
         expect(bankAccount.transactions).toEqual([
-          { date: currentDate, credit: 200, debit: null, balance: 200 },
-          { date: currentDate, credit: null, debit: 100, balance: 100 },
+          { date: currentDate, credit: 200, debit: 0, balance: 200 },
+          { date: currentDate, credit: 0, debit: 100, balance: 100 },
         ]);
       });
     });

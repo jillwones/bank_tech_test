@@ -22,7 +22,7 @@ class BankStatement {
   }
 
   formatAmount(amount) {
-    return amount && amount.toFixed(2);
+    return amount.toFixed(2);
   }
 }
 

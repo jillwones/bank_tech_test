@@ -21,13 +21,13 @@ describe("Bank Statement", () => {
       const transaction = {
         date: new Date("2023-01-24T10:59:31.832Z"),
         credit: 10,
-        debit: null,
+        debit: 0,
         balance: 10,
       };
       const expectedFormattedTransaction = {
         date: "24/01/2023",
         credit: "10.00",
-        debit: null,
+        debit: "0.00",
         balance: "10.00",
       };
       expect(bankStatement.formatTransaction(transaction)).toEqual(
@@ -41,18 +41,18 @@ describe("Bank Statement", () => {
         {
           date: new Date("2023-01-24"),
           credit: 10,
-          debit: null,
+          debit: 0,
           balance: 10,
         },
         {
           date: new Date("2023-01-26"),
           credit: 50,
-          debit: null,
+          debit: 0,
           balance: 60,
         },
         {
           date: new Date("2023-01-29"),
-          credit: null,
+          credit: 0,
           debit: 40,
           balance: 20,
         },
@@ -61,20 +61,20 @@ describe("Bank Statement", () => {
       const expectedFormattedTransaction = [
         {
           date: "29/01/2023",
-          credit: null,
+          credit: "0.00",
           debit: "40.00",
           balance: "20.00",
         },
         {
           date: "26/01/2023",
           credit: "50.00",
-          debit: null,
+          debit: "0.00",
           balance: "60.00",
         },
         {
           date: "24/01/2023",
           credit: "10.00",
-          debit: null,
+          debit: "0.00",
           balance: "10.00",
         },
       ];
