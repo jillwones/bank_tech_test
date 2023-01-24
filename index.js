@@ -1,8 +1,6 @@
 const BankAccount = require("./src/bankAccount");
-const BankStatement = require("./src/bankStatement");
 
-const bankStatement = new BankStatement();
-const bankAccount = new BankAccount(bankStatement);
+const bankAccount = new BankAccount();
 
 bankAccount.deposit(1000);
 bankAccount.deposit(2000);
