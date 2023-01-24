@@ -8,14 +8,24 @@ class BankAccount {
   deposit(amount) {
     this.#validateAmount(amount);
     this.balance += amount;
-    this.transactions.push({ date: new Date(), credit: amount, debit: null, balance: this.balance});
+    this.transactions.push({
+      date: new Date(),
+      credit: amount,
+      debit: null,
+      balance: this.balance,
+    });
   }
 
   withdraw(amount) {
     this.#validateAmount(amount);
     this.#checkFunds(amount);
     this.balance -= amount;
-    this.transactions.push({ date: new Date(), credit: null, debit: amount, balance: this.balance});
+    this.transactions.push({
+      date: new Date(),
+      credit: null,
+      debit: amount,
+      balance: this.balance,
+    });
   }
 
   printStatement() {
